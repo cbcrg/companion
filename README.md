@@ -2,23 +2,14 @@
 
 A portable, scalable eukaryotic genome annotation pipeline implemented in Nextflow.
 
-### [Purpose](#platforms)
+This repository contains a fork of [companion](https://github.com/sanger-pathogens/companion), 
+a pipeline for automatic eukaryotic parasite annotation by the Sanger Institute. 
 
-This software is a comprehensive computational pipeline for the annotation of
-eukaryotic genomes (like protozoan parasites). It performs the following tasks:
+See [companion.sanger.ac.uk](http://companion.sanger.ac.uk) for documentation and more information. 
 
-  - Fast generation of pseudomolecules from scaffolds by ordering and orientating against a reference
-  - Accurate transfer of highly conserved gene models from the reference
-  - _De novo_ gene finding as a complement to the gene transfer
-  - Non-coding RNA detection (tRNA, rRNA, sn(o)RNA, ...)
-  - Pseudogene detection
-  - Functional annotation (GO, products, ...)
-    - ...by transferring reference annotations to the target genome
-    - ...by inferring GO terms and products from Pfam pHMM matches
-  - Consistent gene ID assignment
-  - Preparation of validated GFF3, GAF and EMBL output files for jump-starting manual curation and quick turnaround time to submission
-
-It supports parallelized execution on a single machine as well as on large cluster platforms (LSF, SGE, ...).
+The purpose of this fork is to study numerical stability and replicability of bioinformatics 
+pipelines across different executions platforms.
+ 
 
 ### [Requirements](#requirements)
 
@@ -28,28 +19,43 @@ curl -fsSL get.nextflow.io | bash
 ```
 
 With Nextflow installed, the easiest way to use the pipeline is to use the prepared Docker container (https://hub.docker.com/r/satta/companion/) which contains all external dependencies.
+
 ```
 docker pull sangerpathogens/companion
 ```
 
 ### [Running the pipeline](#running)
 
-Here's how to start an example run using Docker (using the example dataset and parameterization included in the distribution):
+The pipeline has been tested in different Unix-like operating systems with and without [Docker](https://www.docker.com/) containers.
+
+
+#### Docker based execution  
+
+The pipeline can be launched in any system that has the Docker engine installed with this command: 
+
 ```
-$ nextflow run sanger-pathogens/companion -profile docker
+$ nextflow run cbcrg/companion -revision nbt-docker
 ```
 
-For your own runs, provide your own file names, paths, parameters, etc. as defined in the `nextflow.config` file.
+#### Amazon Linux execution 
 
-### [Preparing reference annotations](#reference)
+The pipeline was executed in Amazon Linux (version 2016.03) by using the following command:
 
-The reference annotations used in the pipeline need to be pre-processed before they can be used.
-See [the HOWTO on the GitHub wiki](https://github.com/sanger-pathogens/companion/wiki/Preparing-reference-data-sets) for more details. There are also pre-generated reference sets for various parasite species/families. Please contact the authors via the email address below to obtain them.
+```
+$ nextflow run cbrg/companion -revision nbt-awslinux
+```
 
-### [Contact](#contact)
+In the Linux image were installed the Companion dependencies listed in [here](Dockerfile). The Amazon AMI 
+is publically available in the EU (Dublin) AWS region with the ID `ami-1c364e6f`. 
 
-Sascha Steinbiss (ss34@sanger.ac.uk)
+ 
+#### Mac OSX execution 
 
-###[Build status](#build)
+The pipeline was executed in a Mac OSX by using the following command:
 
-![Travis status](https://travis-ci.org/sanger-pathogens/companion.svg)
+```
+$ nextflow run cbcrg/companion -revision nbt-macosx
+```
+
+In the computer were installed the Companion dependencies listed in [here](Dockerfile).
+
