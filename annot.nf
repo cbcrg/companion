@@ -965,7 +965,7 @@ process run_orthomcl {
       --blast_file blastout \
       --gg_file ggfile
      
-    cp `find \$ORTHOMCL_HOME -type f -name all_orthomcl.out -print0 | xargs -0 stat -f "%m %N" | sort -rn | head -1 | cut -f2- -d" "` orthomcl_out
+    cp `find . -mindepth 1 -name all_orthomcl.out` orthomcl_out
     """
 }
 
