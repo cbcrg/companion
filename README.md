@@ -15,13 +15,14 @@ pipelines across different executions platforms.
 
 The pipeline is built on [Nextflow](http://nextflow.io) as a workflow engine, so it needs to be installed first:
 ```
+export NXF_VER=0.22.0
 curl -fsSL get.nextflow.io | bash
 ```
 
 With Nextflow installed, the easiest way to use the pipeline is to use the prepared Docker container (https://hub.docker.com/r/satta/companion/) which contains all external dependencies.
 
 ```
-docker pull sangerpathogens/companion
+docker pull sangerpathogens/companion@sha256:0d79b408bc2349c57854582769c2083619a246c0f857d76f928238e6e2640287
 ```
 
 ### [Running the pipeline](#running)
