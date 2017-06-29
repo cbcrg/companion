@@ -203,7 +203,7 @@ pseudochr_seq_ncRNA.splitFasta( by: 5, file: true).set { ncrna_genome_chunk }
 process predict_ncRNA {
     input:
     file 'chunk' from ncrna_genome_chunk
-    file ncrna_models from ncrna_cmindex.first()
+    file ncrna_models from ncrna_cmindex
 
     output:
     file 'cm_out' into cmtblouts
@@ -679,7 +679,7 @@ if (params.do_pseudo) {
     process pseudogene_last {
         input:
         file 'chunk.fasta' from pseudogene_align_chunk
-        file prot_index from pseudochr_last_index.first()
+        file prot_index from pseudochr_last_index
 
         output:
         file 'last.out' into pseudochr_last_out
